@@ -1,66 +1,16 @@
-## Foundry
-
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
-
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Current audit test results 
+---------------------------------+----------------+----------------+---------------+----------------╮
+| File                            | % Lines        | % Statements   | % Branches    | % Funcs        |
++====================================================================================================+
+| script/DeployFundMe.s.sol       | 0.00% (0/7)    | 0.00% (0/9)    | 100.00% (0/0) | 0.00% (0/1)    |
+|---------------------------------+----------------+----------------+---------------+----------------|
+| script/HelperConfig.s.sol       | 0.00% (0/13)   | 0.00% (0/11)   | 0.00% (0/2)   | 0.00% (0/3)    |
+|---------------------------------+----------------+----------------+---------------+----------------|
+| src/Fundme.sol                  | 85.71% (24/28) | 91.30% (21/23) | 80.00% (4/5)  | 80.00% (8/10)  |
+|---------------------------------+----------------+----------------+---------------+----------------|
+| src/PriceConverter.sol          | 100.00% (7/7)  | 100.00% (8/8)  | 100.00% (0/0) | 100.00% (2/2)  |
+|---------------------------------+----------------+----------------+---------------+----------------|
+| test/mocks/MockAgreegatorv3.sol | 52.17% (12/23) | 52.94% (9/17)  | 100.00% (0/0) | 50.00% (3/6)   |
+|---------------------------------+----------------+----------------+---------------+----------------|
+| Total                           | 55.13% (43/78) | 55.88% (38/68) | 57.14% (4/7)  | 59.09% (13/22) |
+╰---------------------------------+----------------+----------------+---------------+----------------╯
