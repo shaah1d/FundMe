@@ -1,4 +1,4 @@
-### ✅ Test Coverage Report
+### Current Test Coverage Report
 
 | File                            | % Lines        | % Statements   | % Branches    | % Functions    |
 |---------------------------------|----------------|----------------|---------------|----------------|
