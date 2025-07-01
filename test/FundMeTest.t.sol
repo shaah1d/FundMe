@@ -10,6 +10,7 @@ contract FundmeTest is Test {
     address USER = makeAddr("user");
     MockV3Aggregator mockPriceFeed;
     FundMe fundMe;
+    uint256 public constant GAS_PRICE = 1;
 
     receive() external payable {}
 
@@ -67,10 +68,12 @@ contract FundmeTest is Test {
     function testWithdrawWithASingleFunder() public funded {
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
-
+   
+        vm.txGasPrice(GAS_PRICE);
         vm.prank(fundMe.getOwner());
         fundMe.withdraw();
 
+      
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
         uint256 endingFundMeBalance = address(fundMe).balance;
         assertEq(endingFundMeBalance, 0);
@@ -87,19 +90,18 @@ contract FundmeTest is Test {
             hoax(address(i), 10 ether); //hoax does vm.prank and vm.deal together
             fundMe.fund{value: 10 ether}();
         }
-        //Act 
+        //Act
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
         vm.prank(fundMe.getOwner());
         fundMe.withdraw();
         vm.stopPrank();
 
-        // Assert 
+        // Assert
         assert(address(fundMe).balance == 0);
-        assert(startingFundMeBalance + startingOwnerBalance == 
-        fundMe.getOwner().balance); 
-
+        assert(
+            startingFundMeBalance + startingOwnerBalance ==
+                fundMe.getOwner().balance
+        );
     }
 }
-
-
