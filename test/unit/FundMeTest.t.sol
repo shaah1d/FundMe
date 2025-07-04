@@ -2,9 +2,9 @@
 pragma solidity ^0.8.18;
 
 import {Test, console} from "forge-std/Test.sol";
-import {FundMe} from "../src/Fundme.sol";
-import {DeployFundMe} from "../script/DeployFundMe.s.sol";
-import {MockV3Aggregator} from "../test/mocks/MockAgreegatorv3.sol";
+import {FundMe} from "../../src/Fundme.sol";
+import {DeployFundMe} from "../../script/DeployFundMe.s.sol";
+import {MockV3Aggregator} from "../mocks/MockAgreegatorv3.sol";
 
 contract FundmeTest is Test {
     address USER = makeAddr("user");
