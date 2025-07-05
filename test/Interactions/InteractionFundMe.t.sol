@@ -32,8 +32,32 @@ contract InteractionFundMe is Test {
         vm.prank(USER);
         fundMe.fund{value: SEND_VALUE}();
 
+        // The owner (this test contract) should call withdraw directly
+        // instead of using the WithdrawFundMe script
+        address owner = fundMe.getOwner();
+        vm.prank(owner);
+        fundMe.withdraw();
+
+        uint256 afterUserBalance = address(USER).balance;
+        uint256 afterOwnerBalance = address(fundMe.getOwner()).balance;
+
+        assert(address(fundMe).balance == 0);
+        assertEq(afterUserBalance + SEND_VALUE, preUserBalance);
+        assertEq(preOwnerBalance + SEND_VALUE + originalFundMeBalance, afterOwnerBalance);
+    }
+
+    function testUserCanFundAndOwnerWithdrawUsingScript() public {
+        uint256 preUserBalance = address(USER).balance;
+        uint256 preOwnerBalance = address(fundMe.getOwner()).balance;
+        uint256 originalFundMeBalance = address(fundMe).balance;
+
+        // Using vm.prank to simulate funding from the USER address
+        vm.prank(USER);
+        fundMe.fund{value: SEND_VALUE}();
+
+        // Test using the script with the new function that handles owner internally
         WithdrawFundMe withdrawFundMe = new WithdrawFundMe();
-        withdrawFundMe.withdrawFundMe(address(fundMe));
+        withdrawFundMe.withdrawFundMeAsOwner(address(fundMe));
 
         uint256 afterUserBalance = address(USER).balance;
         uint256 afterOwnerBalance = address(fundMe.getOwner()).balance;
