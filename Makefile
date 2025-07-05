@@ -65,6 +65,6 @@ withdraw:
 
 push:
 	git add .
-	git commit -m "update using the Makefile shortcut"
+	git commit -m "${msg}"
 	git branch -M main
 	git push -u origin main
